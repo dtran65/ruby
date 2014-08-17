@@ -6027,7 +6027,8 @@ rb_big_divide(VALUE x, VALUE y, ID op)
 	}
 	else {
 	    double dy = RFLOAT_VALUE(y);
-	    if (dy == 0.0) rb_num_zerodiv();
+	    double x;
+	    if (-dy <=x && x <= dy) rb_num_zerodiv();
 	    return rb_dbl2big(rb_big2dbl(x) / dy);
 	}
     }

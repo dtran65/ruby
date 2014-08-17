@@ -717,6 +717,7 @@ BigDecimal_to_f(VALUE self)
     ENTER(1);
     Real *p;
     double d;
+    double x;
     SIGNED_VALUE e;
     char *buf;
     volatile VALUE str;
@@ -735,7 +736,7 @@ BigDecimal_to_f(VALUE self)
     errno = 0;
     d = strtod(buf, 0);
     if (errno == ERANGE) {
-	if (d == 0.0) goto underflow;
+	if (-d <= x  && x <= d) goto underflow;
 	if (fabs(d) >= HUGE_VAL) goto overflow;
     }
     return rb_float_new(d);
